@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import img from '../assets/s1.jpg';
 
-export default function PostWrite({ onClose }) {
+export default function PostWrite({ onClose, handleAddPost }) {
   const [postContent, setPostContent] = useState('');
   const [isPostSuccessful, setIsPostSuccessful] = useState(false);
 
@@ -19,6 +19,7 @@ export default function PostWrite({ onClose }) {
       console.log('Post successful:', response.data);
       setPostContent('');
       setIsPostSuccessful(true);
+      handleAddPost(response.data);
       onClose();
     } catch (error) {
       console.error('Error posting:', error);

@@ -21,20 +21,34 @@ export default function Profile() {
       });
       
   }, []);
+
+
+  const handleDeletePost = (postId) => {
+    setPosts(posts.filter(post => post.id !== postId));
+};
   return (
     <>  
-        <div>
-        <div className="bg-black flex ">
-        <Sidebar/>
-        <div className="lg:w-[45%] border border-gray-600 h-auto  border-t-0">
-        <Hero/>
+         <div className="bg-black flex">
+      <div className="hidden lg:block">
+      {/* <div className=""> */}
+
+        <Sidebar />
+      </div>
+
+      <div className="lg:w-[45%] border border-gray-600 h-auto border-t-0">
+        <Hero />
+
         {posts.map(post => (
-          <PostCard key={post.id} post={post} />
+          <PostCard key={post.id} post={post} onDelete={handleDeletePost} />
         ))}
-        </div>
-        <Rightbar/>
-        </div>
-        </div>
+      </div>
+
+      <div className="hidden lg:block">
+      {/* <div className=""> */}
+
+        <Rightbar />
+      </div>
+    </div>
     </>
   )
 }

@@ -4,6 +4,7 @@ import '../components/fonts.css';
 export default function Rightbar() {
   return (
     <>
+    {/* <div className="hidden lg:block"> */}
       <div className="w-74 h-12">
         <div className="relative text-gray-300 w-80 p-5 pb-0">
           <button type="submit" className="absolute ml-4 mt-3 mr-4">
@@ -154,6 +155,7 @@ export default function Rightbar() {
           <hr className="border-gray-600" />
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 }

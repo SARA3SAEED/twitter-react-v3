@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import img from '../assets/s1.jpg';
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, onDelete }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [likedPost, setLikedPosts] = useState([]);
+    const [likedPosts, setLikedPosts] = useState([]);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -13,9 +13,6 @@ export default function PostCard({ post }) {
                 const apiUrl = `https://66829f814102471fa4c79bd6.mockapi.io/info/${userId}`;
                 const response = await axios.get(apiUrl);
                 const userInfo = response.data;
-                console.log(userInfo);
-
-                
                 setLikedPosts(userInfo.postid || []);
             } catch (error) {
                 console.error('Error fetching user info:', error);
@@ -37,39 +34,52 @@ export default function PostCard({ post }) {
         try {
             const userId = localStorage.getItem('user');
             const apiUrl = `https://66829f814102471fa4c79bd6.mockapi.io/info/${userId}`;
-    
-            
             const response = await axios.get(apiUrl);
             const userInfo = response.data;
-    
-           
             const currentLikes = userInfo.postid || [];
-    
-            
             const updatedLikes = currentLikes.includes(post.id)
                 ? currentLikes.filter(id => id !== post.id)
                 : [...currentLikes, post.id];
-    
-          
+
             await axios.put(apiUrl, { ...userInfo, postid: updatedLikes });
-    
-            
             setLikedPosts(updatedLikes);
         } catch (error) {
             console.error('Error updating liked post:', error);
         }
     };
-    
+
     const handleLike2 = () => {
-        if (likedPost.includes(post.id)) {
-            const updatedLikes = likedPost.filter(id => id !== post.id);
-            setLikedPosts(updatedLikes); 
-            handleLike(); 
+        if (likedPosts.includes(post.id)) {
+            const updatedLikes = likedPosts.filter(id => id !== post.id);
+            setLikedPosts(updatedLikes);
+            handleLike();
         } else {
-            setLikedPosts([...likedPost, post.id]);
-            handleLike(); 
+            setLikedPosts([...likedPosts, post.id]);
+            handleLike();
         }
     };
+
+    const handleDelete = async () => {
+        try {
+            const postApiUrl = `https://66829f814102471fa4c79bd6.mockapi.io/post/${post.id}`;
+            await axios.delete(postApiUrl);
+
+            const userId = JSON.parse(localStorage.getItem('user')); 
+            const userApiUrl = `https://66829f814102471fa4c79bd6.mockapi.io/info/${userId}`;
+            const response = await axios.get(userApiUrl);
+            const userInfo = response.data;
+
+            const updatedPostIds = userInfo.postid.filter(id => id !== post.id);
+            await axios.put(userApiUrl, { ...userInfo, postid: updatedPostIds });
+
+            onDelete(post.id);
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        }
+    };
+
+    
+
 
     return (
         <>
@@ -102,7 +112,13 @@ export default function PostCard({ post }) {
 
                         {isOpen && (
                             <div className="absolute right-0 z-20 w-80 py-2 mt-2 overflow-hidden bg-black rounded-md shadow-xl dark:bg-gray-800">
-                                <a href="#" className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={closeDropdown}>
+                                <a 
+                                    href="#"
+                                    className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                                    onClick={() => {
+                                        closeDropdown();
+                                        handleDelete(); 
+                                    }}  >                            
                                     Delete
                                 </a>
 
@@ -166,11 +182,34 @@ export default function PostCard({ post }) {
 
                             <div className="flex-1 text-center py-2 m-2">
                          
-                                                <button onClick={() => handleLike2(post)} className=" mx-1 focus:outline-none">
-                                                    <img className='rounded-full w-6 mt-2' src={likedPost.includes(post.id)
+                                                {/* <button onClick={() => handleLike2(post)} className=" mx-1 focus:outline-none">
+                                                    <img className='rounded-full w-6 mt-2' src={likedPosts.includes(post.id)
                                                     ? "https://cdn-icons-png.flaticon.com/128/166/166538.png" 
                                                     : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcLK4EFsyB-DpaitUlCu8sTgqrumLWTTc06Q&s"} alt="Like" />
-                                                </button>
+                                                </button> */}
+
+
+
+                                <button onClick={() => handleLike(post)} className=" mx-1 focus:outline-none">
+                                    <img className='rounded-full w-6 mt-2' src={likedPosts.includes(post.id)
+                                       ? "data:image/png;base64,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" 
+                                       : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcLK4EFsyB-DpaitUlCu8sTgqrumLWTTc06Q&s"} alt="Like" />
+                                </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
 
                             <div className="flex-1 text-center py-2 m-2">

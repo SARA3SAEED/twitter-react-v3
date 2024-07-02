@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -152,9 +154,9 @@ export default function Signup() {
                 <a className="text-white" href="/login">
                   Forgot password?
                 </a>
-                <a className="text-white" href="/login">
-                  Sign in
-                </a>
+                <Link to="/login" className='text-white' onClick={() => localStorage.clear()}>
+                Log in
+                </Link>
               </div>
             </form>
           </div>
