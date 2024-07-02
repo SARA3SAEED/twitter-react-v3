@@ -43,19 +43,34 @@ const fetchPosts = (postIds) => {
   });
 };
 
+const handleDeletePost = (postId) => {
+  setPosts(posts.filter(post => post.id !== postId));
+};
+
 
   return (
     <>
-      <div className="bg-black flex">
+             <div className="bg-black flex">
+      <div className="hidden lg:block">
+      {/* <div className=""> */}
+
         <Sidebar />
-        <div className="lg:w-[45%] border border-gray-600 h-auto border-t-0">
-          <Hero />
-          {posts.map(post => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
+      </div>
+
+      <div className="lg:w-[45%] border border-gray-600 h-auto border-t-0">
+        <Hero />
+
+        {posts.map(post => (
+          <PostCard key={post.id} post={post} onDelete={handleDeletePost} />
+        ))}
+      </div>
+
+      <div className="hidden lg:block">
+      {/* <div className=""> */}
+
         <Rightbar />
       </div>
+    </div>
     </>
   );
 }
