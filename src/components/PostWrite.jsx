@@ -150,11 +150,11 @@ export default function PostWrite({ onClose, handleAddPost }) {
 
 
 
-{isPostSuccessful && (
+{/* {isPostSuccessful && (
         <div className="max-w-[100%] bg-black rounded-2xl p-4 mt-4 absolute bottom-0 left-0 w-full">
           <p className="text-blue-400 text-center">Post successful!</p>
         </div>
-      )}
+      )} */}
 
 
       

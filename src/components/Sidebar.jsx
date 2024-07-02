@@ -95,7 +95,7 @@ export default function Sidebar() {
                 More
               </a>
 
-              <button
+              {/* <button
                 className="bg-gradient-to-r bg-blue-500  w-48 mt-10 h-12 text-lg rounded-full"
                 onClick={handleOpenPostWrite}
               >
@@ -107,11 +107,43 @@ export default function Sidebar() {
                   onClose={handleClosePostWrite}
                   onAddPost={handleAddPost}
                 />
-              )}
+              )} */}
+                 <button
+              onClick={handleOpenPostWrite}
+              className="bg-blue-400 w-48 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full"
+            >
+              Post
+            </button>
             </nav>
+            
           </div>
+          {/* <button
+                className="bg-gradient-to-r bg-blue-500  w-48 mt-10 h-12 text-lg rounded-full"
+                onClick={handleOpenPostWrite}
+              >
+                Post
+              </button>
+              {isPostWriteOpen && (
+                <PostWrite
+                  isOpen={isPostWriteOpen}
+                  onClose={handleClosePostWrite}
+                  onAddPost={handleAddPost}
+                />
+              )} */}
         </div>
       </div>
+      
+      {isPostWriteOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-black pl-1 rounded-lg shadow-lg z-10 w-2/2">
+            <a onClick={handleClosePostWrite} className="text-white font-bold rounded cursor-pointer">
+              <img className="rounded-full w-5 mr-1" 
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPmwn93SXNLH2agqIze5S0SXrH4MAr-Iu0vQ&s" alt="" />
+            </a>
+            <PostWrite onClose={handleClosePostWrite} handleAddPost={handleAddPost} />
+          </div>
+        </div>
+      )}
     </>
   );
 }
