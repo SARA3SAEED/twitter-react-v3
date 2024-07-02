@@ -28,12 +28,12 @@ export default function Profile() {
 };
   return (
     <>  
-         <div className="bg-black flex">
-      <div className="hidden lg:block">
+         <div className="bg-black lg:flex bg-black m-4">
+      {/* <div className="hidden lg:block"> */}
       {/* <div className=""> */}
 
         <Sidebar />
-      </div>
+      {/* </div> */}
 
       <div className="lg:w-[45%] border border-gray-600 h-auto border-t-0">
         <Hero />
@@ -43,11 +43,11 @@ export default function Profile() {
         ))}
       </div>
 
-      <div className="hidden lg:block">
-      {/* <div className=""> */}
+      {/* <div className="hidden lg:block"> */}
+      {/* <div className="bg-black m-4"> */}
 
         <Rightbar />
-      </div>
+      {/* </div> */}
     </div>
     </>
   )

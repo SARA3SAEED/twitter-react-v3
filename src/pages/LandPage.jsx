@@ -25,12 +25,12 @@ export default function LandPage() {
 
 
   return (
-    <div className="bg-black flex">
-      <div className="hidden lg:block">
+    <div className="bg-black lg:flex ">
+      {/* <div className="sm:hidden lg:block"> */}
       {/* <div className=""> */}
 
         <Sidebar />
-      </div>
+      {/* </div> */}
 
       <div className="lg:w-[45%] border border-gray-600 h-auto border-t-0">
         <Middle />
@@ -40,11 +40,11 @@ export default function LandPage() {
         ))}
       </div>
 
-      <div className="hidden lg:block">
+      {/* <div className="sm:hidden lg:block"> */}
       {/* <div className=""> */}
 
         <Rightbar />
-      </div>
+      {/* </div> */}
     </div>
   );
 }

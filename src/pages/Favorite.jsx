@@ -50,12 +50,12 @@ const handleDeletePost = (postId) => {
 
   return (
     <>
-             <div className="bg-black flex">
-      <div className="hidden lg:block">
+    <div className="bg-black lg:flex ">
+    {/* <div className="hidden lg:block"> */}
       {/* <div className=""> */}
 
         <Sidebar />
-      </div>
+      {/* </div> */}
 
       <div className="lg:w-[45%] border border-gray-600 h-auto border-t-0">
         <Hero />
@@ -65,8 +65,8 @@ const handleDeletePost = (postId) => {
         ))}
       </div>
 
-      <div className="hidden lg:block">
-      {/* <div className=""> */}
+      {/* <div className="hidden lg:block"> */}
+      <div className="bg-black-300">
 
         <Rightbar />
       </div>
