@@ -1,30 +1,31 @@
 import React from 'react';
 import img from '../assets/s1.jpg';
 import NavHero from '../components/NavHero';
+import { Link } from 'react-router-dom';
 
 
 export default function Hero() {
   return (
     <>
-        <div className='m-2'>
-        <div class="flex justify-start">
-            <div class="px-4 py-2 mx-2">
-                <a href="/" class=" text-2xl font-medium rounded-full text-blue-400 hover:bg-gray-800 hover:text-blue-300 float-right">
-                    <svg class="m-2 h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                        <g>
-                            <path d="M20 11H7.414l4.293-4.293c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0l-6 6c-.39.39-.39 1.023 0 1.414l6 6c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L7.414 13H20c.553 0 1-.447 1-1s-.447-1-1-1z">
-                            </path>
-                        </g>
-                    </svg>
-                </a>
-            </div>
-            <div class="mx-2">
-                <h2 class="mb-0 text-xl font-bold text-white">sara almutairi</h2>
-                <p class="mb-0 w-48 text-xs text-gray-400">3 Posts</p>
-            </div>
-        </div>
+<div className='m-2'>
+  <div className="flex justify-start">
+    <div className="px-4 py-2 mx-2">
+      <Link to="/home" className="text-2xl font-medium rounded-full text-blue-400 hover:bg-gray-800 hover:text-blue-300 float-right">
+        <svg className="m-2 h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+          <g>
+            <path d="M20 11H7.414l4.293-4.293c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0l-6 6c-.39.39-.39 1.023 0 1.414l6 6c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L7.414 13H20c.553 0 1-.447 1-1s-.447-1-1-1z"></path>
+          </g>
+        </svg>
+      </Link>
+    </div>
+    <div className="mx-2">
+      <h2 className="mb-0 text-xl font-bold text-white">sara almutairi</h2>
+      <p className="mb-0 w-48 text-xs text-gray-400">3 Posts</p>
+    </div>
+  </div>
 
-        <hr class="border-gray-800"/>
+  <hr className="border-gray-800"/>
+
         <div>
             <div
             className="w-full bg-cover bg-no-repeat bg-center"
